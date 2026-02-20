@@ -10,3 +10,4 @@ application {
 repositories {
     mavenCentral()
 }
+dependencies {implementation("org.testng:testng:7.12.0")}
