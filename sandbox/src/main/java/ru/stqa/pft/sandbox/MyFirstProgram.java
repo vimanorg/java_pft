@@ -14,6 +14,14 @@ public class MyFirstProgram {
     r.a = 4;
     r.b = 6;
     System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
+    // Тестовые точки
+
+    Point a = new Point(0, 0);
+    Point b = new Point(3, 4);
+    Point c = new Point(2, 2);
+    System.out.println("Расстояние от A(0,0) до B(3,4): " + a.distance(b));
+    System.out.println("Расстояние от B(3,4) до C(2,2): " + b.distance(c));
+    System.out.println("Расстояние от A(0,0) до C(2,2): " + a.distance(c));
 
 
   }
@@ -22,5 +30,11 @@ public class MyFirstProgram {
 
     System.out.println("Hello, " + somebody + "!");
   }
+
+
 }
+
+
+
+
 
