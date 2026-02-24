@@ -8,6 +8,22 @@ application {
 }
 
 repositories {
+    // Используем корпоративный репозиторий (Nexus/Artifactory)
+    maven {
+        url 'https://nexus.sovcombank.group/repository/maven-public/'
+        credentials {
+            username = System.getenv('NEXUS_USERNAME') ?: 'anonymous'
+            password = System.getenv('NEXUS_PASSWORD') ?: ''
+        }
+    }
+    // Резервный репозиторий — только если основной недоступен
     mavenCentral()
 }
+
 dependencies {implementation("org.testng:testng:7.12.0")}
+test {
+    useTestNG()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
