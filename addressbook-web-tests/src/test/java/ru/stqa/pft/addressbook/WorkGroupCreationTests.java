@@ -52,17 +52,17 @@ public class WorkGroupCreationTests {
     wd.get("http://localhost:8080/addressbook/group.php"); // Открытие страницы входа
 
     // Авторизация
-    login();
+    login("admin", "secret");
   }
 
-  private void login() {
+  private void login(String username, String password) {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin"); // Ввод логина
+    wd.findElement(By.name("user")).sendKeys(username); // Ввод логина
 
     wd.findElement(By.name("pass")).click();
     wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret"); // Ввод пароля
+    wd.findElement(By.name("pass")).sendKeys(password); // Ввод пароля
 
     wd.findElement(By.xpath("//input[@value='Login']")).click(); // Клик на кнопку "Login"
   }
@@ -83,32 +83,27 @@ public class WorkGroupCreationTests {
   public void testGroupCreation() throws Exception {
     goToGroupPage();// Переход к созданию группы
     initGroupCreation(); // Клик на кнопку "New Group"
-
-    // Заполнение данных группы
-    fillGroupForm();
-
+    fillGroupForm("test1", "test2", "test3");// Заполнение данных группы
     submitGroupGreation(); // Сохранение группы
-
-    // Возврат к списку групп
-    goToGroupPage();
+    goToGroupPage();// Возврат к списку групп
   }
 
   private void submitGroupGreation() {
     wd.findElement(By.name("submit")).click();
   }
 
-  private void fillGroupForm() {
+  private void fillGroupForm(String name, String header, String footer) {
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys("test1"); // Имя группы
+    wd.findElement(By.name("group_name")).sendKeys(name); // Имя группы
 
     wd.findElement(By.name("group_header")).click();
     wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys("test2"); // Заголовок
+    wd.findElement(By.name("group_header")).sendKeys(header); // Заголовок
 
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys("test3"); // Подвал
+    wd.findElement(By.name("group_footer")).sendKeys(footer); // Подвал
   }
 
   private void initGroupCreation() {
