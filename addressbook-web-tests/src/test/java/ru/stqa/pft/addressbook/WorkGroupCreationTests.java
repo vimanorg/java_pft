@@ -52,7 +52,6 @@ public class WorkGroupCreationTests {
     wd.get("http://localhost:8080/addressbook/group.php"); // Открытие страницы входа
 
     // Авторизация
-    wd.findElement(By.id("LoginForm")).click(); // Клик по форме (возможно, лишний)
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin"); // Ввод логина
