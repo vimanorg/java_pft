@@ -52,6 +52,10 @@ public class WorkGroupCreationTests {
     wd.get("http://localhost:8080/addressbook/group.php"); // Открытие страницы входа
 
     // Авторизация
+    login();
+  }
+
+  private void login() {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin"); // Ввод логина
@@ -77,12 +81,23 @@ public class WorkGroupCreationTests {
    */
   @Test
   public void testGroupCreation() throws Exception {
-
-
-    // Переход к созданию группы
-    wd.findElement(By.name("new")).click(); // Клик на кнопку "New Group"
+    goToGroupPage();// Переход к созданию группы
+    initGroupCreation(); // Клик на кнопку "New Group"
 
     // Заполнение данных группы
+    fillGroupForm();
+
+    submitGroupGreation(); // Сохранение группы
+
+    // Возврат к списку групп
+    goToGroupPage();
+  }
+
+  private void submitGroupGreation() {
+    wd.findElement(By.name("submit")).click();
+  }
+
+  private void fillGroupForm() {
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
     wd.findElement(By.name("group_name")).sendKeys("test1"); // Имя группы
@@ -94,12 +109,14 @@ public class WorkGroupCreationTests {
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).clear();
     wd.findElement(By.name("group_footer")).sendKeys("test3"); // Подвал
+  }
 
-    wd.findElement(By.name("submit")).click(); // Сохранение группы
+  private void initGroupCreation() {
+    wd.findElement(By.name("new")).click();
+  }
 
-    // Навигация и выход
+  private void goToGroupPage() {
     wd.findElement(By.linkText("groups")).click(); // Переход к списку групп
-    wd.findElement(By.linkText("Logout")).click(); // Выход из системы
   }
 
   /**
