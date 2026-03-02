@@ -83,7 +83,7 @@ public class WorkGroupCreationTests {
   public void testGroupCreation() throws Exception {
     goToGroupPage();// Переход к созданию группы
     initGroupCreation(); // Клик на кнопку "New Group"
-    fillGroupForm("test1", "test2", "test3");// Заполнение данных группы
+    fillGroupForm(new GroupData("test1", "test2", "test3"));// Заполнение данных группы
     submitGroupGreation(); // Сохранение группы
     goToGroupPage();// Возврат к списку групп
   }
@@ -92,18 +92,18 @@ public class WorkGroupCreationTests {
     wd.findElement(By.name("submit")).click();
   }
 
-  private void fillGroupForm(String name, String header, String footer) {
+  private void fillGroupForm(GroupData groupData) {
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys(name); // Имя группы
+    wd.findElement(By.name("group_name")).sendKeys(groupData.name()); // Имя группы
 
     wd.findElement(By.name("group_header")).click();
     wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(header); // Заголовок
+    wd.findElement(By.name("group_header")).sendKeys(groupData.header()); // Заголовок
 
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(footer); // Подвал
+    wd.findElement(By.name("group_footer")).sendKeys(groupData.footer()); // Подвал
   }
 
   private void initGroupCreation() {
