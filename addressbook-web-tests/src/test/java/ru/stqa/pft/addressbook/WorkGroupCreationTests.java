@@ -31,20 +31,6 @@ public class WorkGroupCreationTests {
    */
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
-    setUp("admin", "secret");
-  }
-
-  /**
-   * Инициализация перед каждым тестом.
-   * - Устанавливает путь к драйверу GeckoDriver для Firefox.
-   * - Настраивает Firefox с указанием пути к исполняемому файлу.
-   * - Устанавливает неявное ожидание 30 секунд.
-   * - Ожидает загрузки страницы group.php и проверяет, что это не ошибка "neterror".
-   * @param username
-   * @param password
-   */
-  @BeforeMethod(alwaysRun = true)
-  public void setUp(String username, String password) throws Exception {
     System.setProperty("webdriver.gecko.driver", "C:\\Develop\\java_pft\\addressbook-web-tests\\WebDriver\\geckodriver.exe");
 
     FirefoxOptions options = new FirefoxOptions();
@@ -63,17 +49,17 @@ public class WorkGroupCreationTests {
         return false;
       }
     });
-    goToGroupPage();
+    wd.get("http://localhost:8080/addressbook/group.php"); // Открытие страницы входа
 
     // Авторизация
     wd.findElement(By.id("LoginForm")).click(); // Клик по форме (возможно, лишний)
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(username); // Ввод логина
+    wd.findElement(By.name("user")).sendKeys("admin"); // Ввод логина
 
     wd.findElement(By.name("pass")).click();
     wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password); // Ввод пароля
+    wd.findElement(By.name("pass")).sendKeys("secret"); // Ввод пароля
 
     wd.findElement(By.xpath("//input[@value='Login']")).click(); // Клик на кнопку "Login"
   }
@@ -92,53 +78,29 @@ public class WorkGroupCreationTests {
    */
   @Test
   public void testGroupCreation() throws Exception {
-    goToGroupPage();
+
 
     // Переход к созданию группы
-    initGroupCreation();
+    wd.findElement(By.name("new")).click(); // Клик на кнопку "New Group"
 
     // Заполнение данных группы
-    fillGroupForm("test1", "test2", "test3");
-
-    submitGroupCreation(); // Сохранение группы
-
-    // Навигация и выход
-    returnToGroupePage();
-    getLogout(); // Выход из системы
-  }
-
-  private void getLogout() {
-    wd.findElement(By.linkText("Logout")).click();
-  }
-
-  private void returnToGroupePage() {
-    wd.findElement(By.linkText("groups")).click(); // Переход к списку групп
-  }
-
-  private void submitGroupCreation() {
-    wd.findElement(By.name("submit")).click();
-  }
-
-  private void fillGroupForm(String name, String header, String footer) {
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys(name); // Имя группы
+    wd.findElement(By.name("group_name")).sendKeys("test1"); // Имя группы
 
     wd.findElement(By.name("group_header")).click();
     wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(header); // Заголовок
+    wd.findElement(By.name("group_header")).sendKeys("test2"); // Заголовок
 
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(footer); // Подвал
-  }
+    wd.findElement(By.name("group_footer")).sendKeys("test3"); // Подвал
 
-  private void initGroupCreation() {
-    wd.findElement(By.name("new")).click();
-  }
+    wd.findElement(By.name("submit")).click(); // Сохранение группы
 
-  private void goToGroupPage() {
-    wd.get("http://localhost:8080/addressbook/group.php");
+    // Навигация и выход
+    wd.findElement(By.linkText("groups")).click(); // Переход к списку групп
+    wd.findElement(By.linkText("Logout")).click(); // Выход из системы
   }
 
   /**
@@ -178,4 +140,3 @@ public class WorkGroupCreationTests {
     }
   }
 }
-
