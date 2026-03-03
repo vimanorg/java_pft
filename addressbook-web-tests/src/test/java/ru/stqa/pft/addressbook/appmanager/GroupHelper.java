@@ -33,7 +33,7 @@ public class GroupHelper {
     wd.findElement(By.name("new")).click();
   }
 
-  public void goToGroupPage() {
+  public void returnToGroupPage() {
     wd.findElement(By.linkText("groups")).click(); // Переход к списку групп
   }
 

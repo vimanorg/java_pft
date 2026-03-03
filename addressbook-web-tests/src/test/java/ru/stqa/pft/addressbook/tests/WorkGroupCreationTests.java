@@ -24,11 +24,11 @@ public class WorkGroupCreationTests extends TestBase {
    */
   @Test
   public void testGroupCreation() throws Exception {
-    app.getGroupHelper().goToGroupPage();// Переход к созданию группы
+    app.getGroupHelper().returnToGroupPage();// Переход к созданию группы
     app.getGroupHelper().initGroupCreation(); // Клик на кнопку "New Group"
     app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));// Заполнение данных группы
     app.getGroupHelper().submitGroupGreation(); // Сохранение группы
-    app.getGroupHelper().goToGroupPage();// Возврат к списку групп
+    app.getGroupHelper().returnToGroupPage();// Возврат к списку групп
   }
 
 }
