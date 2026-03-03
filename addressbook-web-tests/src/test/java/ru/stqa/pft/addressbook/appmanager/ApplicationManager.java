@@ -7,12 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.time.Duration;
 
 public class ApplicationManager {
-  private WebDriver wd; // Экземпляр веб-драйвера для управления браузером
+  protected WebDriver wd; // Экземпляр веб-драйвера для управления браузером
+  private  GroupHelper groupHelper;
 
   public void init() {
     System.setProperty("webdriver.gecko.driver", "C:\\Develop\\java_pft\\addressbook-web-tests\\WebDriver\\geckodriver.exe");
@@ -34,6 +34,7 @@ public class ApplicationManager {
       }
     });
     wd.get("http://localhost:8080/addressbook/group.php"); // Открытие страницы входа
+    groupHelper = new GroupHelper(wd);
 
     // Авторизация
     login("admin", "secret");
@@ -49,32 +50,6 @@ public class ApplicationManager {
     wd.findElement(By.name("pass")).sendKeys(password); // Ввод пароля
 
     wd.findElement(By.xpath("//input[@value='Login']")).click(); // Клик на кнопку "Login"
-  }
-
-  public void submitGroupGreation() {
-    wd.findElement(By.name("submit")).click();
-  }
-
-  public void fillGroupForm(GroupData groupData) {
-    wd.findElement(By.name("group_name")).click();
-    wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys(groupData.name()); // Имя группы
-
-    wd.findElement(By.name("group_header")).click();
-    wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(groupData.header()); // Заголовок
-
-    wd.findElement(By.name("group_footer")).click();
-    wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(groupData.footer()); // Подвал
-  }
-
-  public void initGroupCreation() {
-    wd.findElement(By.name("new")).click();
-  }
-
-  public void goToGroupPage() {
-    wd.findElement(By.linkText("groups")).click(); // Переход к списку групп
   }
 
   public void stop() {
@@ -109,11 +84,7 @@ public class ApplicationManager {
     }
   }
 
-  public void deleteSelectedGroups() {
-    wd.findElement(By.name("delete")).click();
-  }
-
-  public void selectGroup() {
-    wd.findElement(By.name("selected[]")).click();
+  public GroupHelper getGroupHelper() {
+    return groupHelper;
   }
 }
