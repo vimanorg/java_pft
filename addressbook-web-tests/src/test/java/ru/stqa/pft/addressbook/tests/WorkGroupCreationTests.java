@@ -1,6 +1,7 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 /**
  * Тест-кейс для проверки создания группы в приложении Address Book.
@@ -23,11 +24,11 @@ public class WorkGroupCreationTests extends TestBase {
    */
   @Test
   public void testGroupCreation() throws Exception {
-    goToGroupPage();// Переход к созданию группы
-    initGroupCreation(); // Клик на кнопку "New Group"
-    fillGroupForm(new GroupData("test1", "test2", "test3"));// Заполнение данных группы
-    submitGroupGreation(); // Сохранение группы
-    goToGroupPage();// Возврат к списку групп
+    app.goToGroupPage();// Переход к созданию группы
+    app.initGroupCreation(); // Клик на кнопку "New Group"
+    app.fillGroupForm(new GroupData("test1", "test2", "test3"));// Заполнение данных группы
+    app.submitGroupGreation(); // Сохранение группы
+    app.goToGroupPage();// Возврат к списку групп
   }
 
 }
