@@ -9,13 +9,13 @@ application {
 
 repositories {
     // Используем корпоративный репозиторий (Nexus/Artifactory)
-   // maven {
-       // url 'https://nexus.sovcombank.group/repository/maven-public/'
-      //  credentials {
-         //   username = System.getenv('NEXUS_USERNAME') ?: 'anonymous'
-         //   password = System.getenv('NEXUS_PASSWORD') ?: ''
-      //  }
-  // }
+    maven {
+        url 'https://nexus.sovcombank.group/repository/maven-public/'
+       credentials {
+            username = System.getenv('NEXUS_USERNAME') ?: 'anonymous'
+            password = System.getenv('NEXUS_PASSWORD') ?: ''
+       }
+   }
     // Резервный репозиторий — только если основной недоступен
     mavenCentral()
 }
