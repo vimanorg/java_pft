@@ -21,16 +21,6 @@ public class ApplicationManager {
     wd = new FirefoxDriver(options);
     wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
-    // Явное ожидание: ждём, пока страница group.php загрузится и не вернёт ошибку "neterror"
-    WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(30));
-    wait.until(driver -> {
-      try {
-        driver.get("http://localhost:8080/addressbook/group.php");
-        return !driver.getTitle().contains("neterror");
-      } catch (Exception e) {
-        return false;
-      }
-    });
 
     navigationHelper = new NavigationHelper(wd);
     groupHelper = new GroupHelper(wd);
