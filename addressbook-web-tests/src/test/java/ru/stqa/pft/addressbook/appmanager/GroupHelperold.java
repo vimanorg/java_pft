@@ -2,11 +2,11 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.GroupDataold;
 
-public class GroupHelper extends HelperBase {
+public class GroupHelperold extends HelperBaseold {
 
-  public GroupHelper(WebDriver wd) {
+  public GroupHelperold(WebDriver wd) {
     super(wd);
   }
 
@@ -14,7 +14,7 @@ public class GroupHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillGroupForm(GroupData groupData) {
+  public void fillGroupForm(GroupDataold groupData) {
     type(By.name("group_name"), groupData.name());
 
     type(By.name("group_header"), groupData.header());

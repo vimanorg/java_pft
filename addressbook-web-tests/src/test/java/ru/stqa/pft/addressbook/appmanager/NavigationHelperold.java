@@ -2,10 +2,10 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.WebDriver;
 
-public class NavigationHelper extends HelperBase {
+public class NavigationHelperold extends HelperBaseold {
 
 
-  public NavigationHelper(WebDriver wd) {
+  public NavigationHelperold(WebDriver wd) {
     super(wd);
   }
 

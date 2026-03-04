@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
-public class HelperBase {
+public class HelperBaseold {
   protected WebDriver wd; // Экземпляр веб-драйвера для управления браузером
 
-  public HelperBase(WebDriver wd) {
+  public HelperBaseold(WebDriver wd) {
     this.wd = wd;
   }
 

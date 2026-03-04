@@ -11,14 +11,14 @@ import java.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ApplicationManager {
+public class ApplicationManagerold {
   protected WebDriver wd; // Экземпляр веб-драйвера для управления браузером
-  private NavigationHelper navigationHelper;
-  private GroupHelper groupHelper;
+  private NavigationHelperold navigationHelper;
+  private GroupHelperold groupHelper;
   private String browser;
-  private static final Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
+  private static final Logger logger = LoggerFactory.getLogger(ApplicationManagerold.class);
 
-  public ApplicationManager(String browser) {
+  public ApplicationManagerold(String browser) {
     this.browser = browser;
   }
 
@@ -43,13 +43,13 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     wd.manage().window().maximize();
 
-    navigationHelper = new NavigationHelper(wd);
-    groupHelper = new GroupHelper(wd);
+    navigationHelper = new NavigationHelperold(wd);
+    groupHelper = new GroupHelperold(wd);
 
     navigationHelper.goToGrupePage(wd);
 
     // Авторизация
-    SessionHelper sessionHelper = new SessionHelper(wd);
+    SessionHelperold sessionHelper = new SessionHelperold(wd);
     sessionHelper.login("admin", "secret");
 
     logger.info("Инициализация ApplicationManager завершена");
@@ -61,7 +61,7 @@ public class ApplicationManager {
     }
   }
 
-  public GroupHelper getGroupHelper() {
+  public GroupHelperold getGroupHelper() {
     return groupHelper;
   }
 }
