@@ -1,5 +1,6 @@
 package home.ru.stqa.pft.addressbook.appmanager;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class NavigationHelper {
@@ -10,7 +11,6 @@ public class NavigationHelper {
     }
 
     public void goToGroupPage() {
-
-            wd.get("http://localhost/addressbook/group.php");
+        wd.findElement(By.linkText("groups")).click();
     }
 }
