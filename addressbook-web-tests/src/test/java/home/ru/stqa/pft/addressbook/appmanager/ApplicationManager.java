@@ -1,33 +1,33 @@
 package home.ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import java.time.Duration;
 
 public class ApplicationManager {
-    private  String browser = "";
-    WebDriver wd;
 
+    WebDriver wd;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
+    private BrowserType browser; // тип изменён с String на BrowserType
 
-    public ApplicationManager(){
+    public ApplicationManager(BrowserType browser) { // конструктор теперь принимает BrowserType
         this.browser = browser;
     }
 
     public void init() {
-        Browser BrowserType = null;
+        if (browser == BrowserType.FIREFOX) {
+            wd = new FirefoxDriver();
+        } else if (browser == BrowserType.CHROME) {
+            wd = new ChromeDriver();
+        } else if (browser == BrowserType.IE) {
+            wd = new InternetExplorerDriver();
+        } else {
+            throw new IllegalArgumentException("Unsupported browser: " + browser);
+        }
 
-        if (false) {wd = new FirefoxDriver();
-        }
-        else if (false) { wd = new ChromeDriver();
-        }
-        else if (false) {wd = new internetExplorerDriver();
-        }
-        wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wd.get("http://localhost/addressbook/group.php");
         groupHelper = new GroupHelper(wd);
@@ -35,7 +35,6 @@ public class ApplicationManager {
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
-
 
     public void stop() {
         wd.quit();
